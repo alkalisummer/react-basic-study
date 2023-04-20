@@ -1,14 +1,14 @@
-const DiaryItem = ({ diaryList }) => {
+const DiaryItem = ({ author, content, created_date, emotion, id }) => {
   return (
-    <div className="DairyItem">
-      {diaryList.map((obj) => (
-        <div key={obj.id}>
-          <div>작성자 : {obj.author}</div>
-          <div>내용 : {obj.content}</div>
-          <div>감정점수 : {obj.emotion}</div>
-          <div>작성시간(ms) : {obj.created_date}</div>
-        </div>
-      ))}
+    <div className="DiaryItem">
+      <div className="info">
+        <span>
+          작성자 : {author} | 감정점수 : {emotion}
+        </span>
+        <br />
+        <span className="date">{new Date(created_date).toLocaleString()}</span>
+      </div>
+      <div className="content">{content}</div>
     </div>
   );
 };
