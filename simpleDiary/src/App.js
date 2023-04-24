@@ -1,10 +1,8 @@
 import "./App.css";
 import DiaryEdtior from "./DiaryEditor";
 import DiaryList from "./DiaryList";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import Lifecycle from "./Lifecycle";
-
-//https://jsonplaceholder.typicode.com/comments
 
 function App() {
   const [data, setData] = useState([]);
@@ -55,10 +53,24 @@ function App() {
     setData(data.map((obj) => (obj.id === targetId ? { ...obj, content: newContent } : obj)));
   };
 
+  const getDiaryAnalysis = useMemo(() => {
+    console.log("다이어리분석시작");
+
+    const goodCount = data.filter((obj) => obj.emotion >= 3).length;
+    const badCount = data.length - goodCount;
+    const goodRatio = Math.floor((goodCount / data.length) * 100);
+    return { goodCount, badCount, goodRatio };
+  }, [data.length]);
+
+  const { goodCount, badCount, goodRatio } = getDiaryAnalysis;
+
   return (
     <div className="App">
-      {/* <Lifecycle /> */}
       <DiaryEdtior onCreate={onCreate} />
+      <div>전체 게시글 수 : {data.length}</div>
+      <div>기분 좋은 게시글 수 : {goodCount}</div>
+      <div>기분 나쁜 게시글 수: {badCount}</div>
+      <div>기분 좋은 게시글 비율 : {goodRatio}</div>
       <DiaryList onRemove={onRemove} onEdit={onEdit} diaryList={data} />
     </div>
   );
