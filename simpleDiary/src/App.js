@@ -2,7 +2,8 @@ import "./App.css";
 import DiaryEdtior from "./DiaryEditor";
 import DiaryList from "./DiaryList";
 import { useState, useRef, useEffect, useMemo } from "react";
-import Lifecycle from "./Lifecycle";
+import OptimizeTest from "./OptimizeTest";
+import OptimizeTestOther from "./OptimizeTestOther";
 
 function App() {
   const [data, setData] = useState([]);
@@ -54,18 +55,19 @@ function App() {
   };
 
   const getDiaryAnalysis = useMemo(() => {
-    console.log("다이어리분석시작");
-
     const goodCount = data.filter((obj) => obj.emotion >= 3).length;
     const badCount = data.length - goodCount;
     const goodRatio = Math.floor((goodCount / data.length) * 100);
     return { goodCount, badCount, goodRatio };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data.length]);
 
   const { goodCount, badCount, goodRatio } = getDiaryAnalysis;
 
   return (
     <div className="App">
+      <OptimizeTestOther />
+      <OptimizeTest />
       <DiaryEdtior onCreate={onCreate} />
       <div>전체 게시글 수 : {data.length}</div>
       <div>기분 좋은 게시글 수 : {goodCount}</div>
