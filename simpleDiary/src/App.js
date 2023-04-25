@@ -1,7 +1,7 @@
 import "./App.css";
 import DiaryEdtior from "./DiaryEditor";
 import DiaryList from "./DiaryList";
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import OptimizeTest from "./OptimizeTest";
 import OptimizeTestOther from "./OptimizeTestOther";
 
@@ -32,7 +32,7 @@ function App() {
     getData();
   }, []);
 
-  const onCreate = (author, content, emotion) => {
+  const onCreate = useCallback((author, content, emotion) => {
     const created_date = new Date().getTime();
     const newItem = {
       author,
@@ -42,8 +42,8 @@ function App() {
       id: dataId.current,
     };
     dataId.current += 1;
-    setData([newItem, ...data]);
-  };
+    setData((data) => [newItem, ...data]);
+  }, []);
 
   const onRemove = (targetId) => {
     const newDiaryList = data.filter((obj) => obj.id !== targetId);
@@ -66,8 +66,6 @@ function App() {
 
   return (
     <div className="App">
-      <OptimizeTestOther />
-      <OptimizeTest />
       <DiaryEdtior onCreate={onCreate} />
       <div>전체 게시글 수 : {data.length}</div>
       <div>기분 좋은 게시글 수 : {goodCount}</div>
