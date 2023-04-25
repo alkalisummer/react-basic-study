@@ -4,7 +4,6 @@ const DiaryEdtior = ({ onCreate }) => {
   const authorInput = useRef();
   const contentInput = useRef();
 
-  useEffect(() => console.log("diaryeditor update"));
   const [state, setState] = useState({
     author: "",
     content: "",
