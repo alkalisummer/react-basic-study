@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import DiaryItem from "./DiaryItem";
 import { DiaryStateContext } from "./App";
 
@@ -17,4 +17,4 @@ const DiaryList = () => {
   );
 };
 DiaryList.defaultProps = { diaryList: [] };
-export default DiaryList;
+export default React.Memo(DiaryList);

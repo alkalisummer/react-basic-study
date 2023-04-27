@@ -87,10 +87,12 @@ const App = () => {
       <DiaryDispatchContext.Provider value={memoizedDispatches}>
         <div className="App">
           <DiaryEdtior />
-          <div>전체 게시글 수 : {data.length}</div>
-          <div>기분 좋은 게시글 수 : {goodCount}</div>
-          <div>기분 나쁜 게시글 수: {badCount}</div>
-          <div>기분 좋은 게시글 비율 : {goodRatio}</div>
+          <div className="Analysis">
+            <span>전체 게시글 수 : {data.length}</span>
+            <span>기분 좋은 게시글 수 : {goodCount}</span>
+            <span>기분 나쁜 게시글 수: {badCount}</span>
+            <span>기분 좋은 게시글 비율 : {goodRatio}</span>
+          </div>
           <DiaryList />
         </div>
       </DiaryDispatchContext.Provider>

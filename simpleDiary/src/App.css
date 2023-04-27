@@ -1,18 +1,18 @@
 .DiaryEditor {
-  border : 1px solid gray;
-  text-align : center;
-  padding : 20px;
+  border: 1px solid gray;
+  text-align: center;
+  padding: 20px;
 }
 
-.DiaryEditor input
-, textarea {
-  margin-bottom : 20px;
-  width : 500px;
-  padding : 10px;
+.DiaryEditor input,
+textarea {
+  margin-bottom: 20px;
+  width: 500px;
+  padding: 10px;
 }
 
 .DiaryEditor textarea {
-  height : 150px;
+  height: 150px;
 }
 
 .DiaryEditor select {
@@ -30,9 +30,9 @@
 /* List */
 
 .DiaryList {
-  border : 1px solid gray;
-  padding : 20px;
-  margin-top : 20px;
+  border: 1px solid gray;
+  padding: 20px;
+  margin-top: 20px;
 }
 
 .DiaryList h2 {
@@ -63,3 +63,15 @@
   margin-top: 30px;
 }
 
+.Analysis {
+  padding: 20px;
+  padding-bottom: 0px;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.Analysis span {
+  font-size: 18px;
+  font-weight: bold;
+}
