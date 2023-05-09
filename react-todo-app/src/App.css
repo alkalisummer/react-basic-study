@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+.container {
+  margin: auto;
+  max-width: 600px;
+  font-family: "Nanum Gothic";
+}
+
+ .todoBlock {
+  padding: 30px;
+  margin-top: 50px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: -9px 17px 13px rgb(0 0 0 /16%);
+ }
