@@ -4,18 +4,8 @@ import "./App.css";
 export default class App extends Component {
 
   state = {
-    todoData : [
-      {
-        id: "1",
-        title: "공부하기",
-        completed: true
-      },
-      {
-        id: "2",
-        title: "청소하기",
-        completed: false
-      },
-    ]
+    todoData : [],
+    value: ""
   }
   btnStyle = {
     color: "#fff",
@@ -25,11 +15,11 @@ export default class App extends Component {
     float: "right"
   };
 
-  getStyle = () => {
+  getStyle = (completed) => {
     return {
       padding: "10px",
       borderBottom: "1px #ccc dotted",
-      textDecoration: "none"
+      textDecoration: completed ? "line-through" : "none"
     }
   };
 
@@ -38,6 +28,33 @@ export default class App extends Component {
     this.setState({todoData : newTodoData});
   }
 
+  handleChange = (e) => {
+    this.setState({value : e.target.value})
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    
+    let newTodo = {
+      id : Date.now(),
+      title : this.state.value,
+      completed: false
+    }
+
+    this.setState({todoData: [...this.state.todoData, newTodo], value:""})
+    
+  } 
+
+  handleCheck = (id) => {
+    let newTodo = this.state.todoData.map((obj)=>{
+      if(obj.id === id){
+        obj.completed = !obj.completed;
+      }
+      return obj;
+    });
+     
+    this.setState({todoData : newTodo});
+  }
 
   render() {
     return (
@@ -48,15 +65,30 @@ export default class App extends Component {
           </div>
           {this.state.todoData.map((obj) => {
             return (
-              <div style={this.getStyle()} key={obj.id}>
+              <div style={this.getStyle(obj.completed)} key={obj.id}>
                 <p>
-                  <input type="checkbox" defaultChecked={false}/>
+                  <input type="checkbox" defaultChecked={false} onChange={()=>this.handleCheck(obj.id)}/>
                   {` ${obj.title}`}
                   <button style={this.btnStyle} onClick={() => this.handleClick(obj.id)}>x</button>
                 </p>
               </div>
             );
           })}
+          <form style={{display: 'flex'}} onSubmit={this.handleSubmit}>
+            <input type="text" 
+                   name="value" 
+                   style={{ flex: "10", padding: "5px"}}
+                   placeholder="해야 할 일을 입력하세요."
+                   value={this.state.value}
+                   onChange={this.handleChange}
+            />
+            <input 
+              type="submit"
+              value="입력"
+              className="btn"
+              style={{ flex: "1" }}
+            />            
+          </form>
         </div>
       </div>
     )
