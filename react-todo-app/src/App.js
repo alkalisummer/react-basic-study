@@ -35,7 +35,8 @@ export default class App extends Component {
 
   handleClick = (id) => {
     let newTodoData = this.state.todoData.filter(obj=>obj.id !== id);
-    this.setState({todoData : newTodoData})
+    this.setState({todoData : newTodoData});
+    
   }
 
 
