@@ -2,14 +2,6 @@ import React from 'react'
 
 export default function List({ todoData, setTodoData }) {
 
-  const btnStyle = {
-    color: "#fff",
-    border: "none",
-    padding: "5px 9px",
-    borderRadius: "50%",
-    float: "right"
-  };
-
   const handleCheck = (id) => {
     let newTodo = todoData.map((obj)=>{
       if(obj.id === id){
@@ -21,14 +13,6 @@ export default function List({ todoData, setTodoData }) {
     setTodoData(newTodo);
   }
 
-  const getStyle = (completed) => {
-    return {
-      padding: "10px",
-      borderBottom: "1px #ccc dotted",
-      textDecoration: completed ? "line-through" : "none"
-    }
-  };
-
   const handleClick = (id) => {
     let newTodoData = todoData.filter(obj=>obj.id !== id);
     setTodoData(newTodoData);
@@ -38,12 +22,18 @@ export default function List({ todoData, setTodoData }) {
     <div>
       {todoData.map((obj) => {
         return (
-          <div style={getStyle(obj.completed)} key={obj.id}>
-            <p>
-              <input type="checkbox" defaultChecked={false} onChange={()=>handleCheck(obj.id)}/>
-              {` ${obj.title}`}
-              <button style={btnStyle} onClick={() => handleClick(obj.id)}>x</button>
-            </p>
+          <div key={obj.id}>
+            <div className="flex items-center justify-between w-full px-4 py-1 my-2 text-gray-600 bg-gray-50 border rounded">
+              <div className="items-center">
+                <input type="checkbox" defaultChecked={false} onChange={()=>handleCheck(obj.id)}/>
+                <span className={obj.completed ? "line-through text-sm" : "text-sm"}>
+                  {` ${obj.title}`}
+                </span>
+              </div>
+              <div className="items-center">
+                <button onClick={() => handleClick(obj.id)}>x</button>
+              </div>
+            </div>
           </div>
         );
       })}    
