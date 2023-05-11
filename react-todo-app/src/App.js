@@ -1,13 +1,35 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import "./App.css";
 import Lists from "./components/Lists";
 import Form from "./components/Form";
 
+const initialTodoData = () => {
+  const initData = localStorage.getItem("todoData");
+  if(initData !== "undefined" && initData){
+    return JSON.parse(initData);
+  }else {
+    return JSON.parse([]);
+  }
+}
+
 export default function App() {
 
-  const [todoData, setTodoData] = useState([]);
+  const [todoData, setTodoData] = useState(initialTodoData);
   const [value, setValue] = useState("");
 
+  // useEffect(()=>{
+  //   const initData = localStorage.getItem("todoData");
+  //   if(initData !== "undefined" && initData){
+  //     setTodoData(JSON.parse(initData));
+  //   }
+  // }, []);
+  
+  // useEffect(()=>{
+  //   if(todoData){
+  //     localStorage.setItem("todoData", JSON.stringify(todoData));
+  //   }
+  // }, [todoData]);
+  
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
     let newTodo = {
@@ -15,14 +37,16 @@ export default function App() {
       title : value,
       completed: false
     }
-
+    
     setTodoData(prev => [...prev, newTodo]);
+    localStorage.setItem("todoData", JSON.stringify([...todoData, newTodo]));
     setValue("");
     
   }, [value]);
 
   const handleRemoveClick = () => {
     setTodoData([]);
+    localStorage.setItem("todoData", JSON.stringify([]));
   }
 
   return (

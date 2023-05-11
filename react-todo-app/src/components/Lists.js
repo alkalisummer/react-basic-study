@@ -3,7 +3,6 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import List from './List';
 
 function Lists({ todoData, setTodoData }) {
-  console.log("Lists Component");
   const handleEnd = (result) => {
     // 목적지가 없다면 return
     if(!result.destination) return;
@@ -17,6 +16,7 @@ function Lists({ todoData, setTodoData }) {
     // 원하는 index에 reorderedItem을 insert 한다.
     newTodoData.splice(result.destination.index, 0, reorderedItem);
     setTodoData(newTodoData);
+    localStorage.setItem("todoData", JSON.stringify(newTodoData));
 
   }
 

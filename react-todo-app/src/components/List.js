@@ -15,11 +15,13 @@ function List({
     });
      
     setTodoData(newTodo);
+    localStorage.setItem("todoData", JSON.stringify(newTodo));
   }
   
   const handleClick = (id) => {
     let newTodoData = todoData.filter(obj=>obj.id !== id);
     setTodoData(newTodoData);
+    localStorage.setItem("todoData", JSON.stringify(newTodoData));
   }
 
   const handleEditChange = (e)=> {
@@ -37,6 +39,7 @@ function List({
     });
 
     setTodoData(newTodoData);
+    localStorage.setItem("todoData", JSON.stringify(newTodoData));
     setIsEditing(false);
   }
   
@@ -70,7 +73,7 @@ function List({
            ref={provided.innerRef} {...provided.dragHandleProps} 
            className={`${snapshot.isDragging? "bg-gray-400" : "bg-gray-50"} flex items-center justify-between w-full px-4 py-1 my-2 text-gray-600 border rounded`}>
         <div className="items-center">
-          <input type="checkbox" defaultChecked={false} onChange={()=>handleCheck(id)}/>
+          <input type="checkbox" defaultChecked={completed} onChange={()=>handleCheck(id)}/>
           <span className={completed ? "line-through text-sm" : "text-sm"}>
             {` ${title}`}
           </span>
