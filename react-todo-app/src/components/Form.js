@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function Form({ value, setValue, handleSubmit }) {
-  
+function Form({ value, setValue, handleSubmit }) {
+  console.log("Form Component");
   const handleChange = (e) => {
     setValue(e.target.value);
   }
@@ -25,3 +25,5 @@ export default function Form({ value, setValue, handleSubmit }) {
     </div>
   )
 }
+
+export default React.memo(Form);

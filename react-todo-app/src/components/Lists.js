@@ -3,7 +3,7 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import List from './List';
 
 function Lists({ todoData, setTodoData }) {
-
+  console.log("Lists Component");
   const handleEnd = (result) => {
     // 목적지가 없다면 return
     if(!result.destination) return;
@@ -55,4 +55,4 @@ function Lists({ todoData, setTodoData }) {
   )
 }
 
-export default Lists;
+export default React.memo(Lists);

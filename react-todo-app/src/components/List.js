@@ -3,22 +3,22 @@ import React from 'react'
 function List({
     id, title, completed, todoData, setTodoData, provided, snapshot
 }) {
-
-    const handleCheck = (id) => {
-      let newTodo = todoData.map((obj)=>{
-        if(obj.id === id){
-          obj.completed = !obj.completed;
-        }
-        return obj;
-      });
-       
-      setTodoData(newTodo);
-    }
-    
-    const handleClick = (id) => {
-      let newTodoData = todoData.filter(obj=>obj.id !== id);
-      setTodoData(newTodoData);
-    }
+  console.log("List Component");
+  const handleCheck = (id) => {
+    let newTodo = todoData.map((obj)=>{
+      if(obj.id === id){
+        obj.completed = !obj.completed;
+      }
+      return obj;
+    });
+     
+    setTodoData(newTodo);
+  }
+  
+  const handleClick = (id) => {
+    let newTodoData = todoData.filter(obj=>obj.id !== id);
+    setTodoData(newTodoData);
+  }
 
   return (
     <div key={id} {...provided.draggableProps} 
@@ -37,4 +37,4 @@ function List({
   )
 }
 
-export default List
+export default React.memo(List);

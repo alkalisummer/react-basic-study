@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import "./App.css";
 import Lists from "./components/Lists";
 import Form from "./components/Form";
 
 export default function App() {
+  console.log("App Component");
 
   const [todoData, setTodoData] = useState([]);
   const [value, setValue] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = useCallback((e) => {
     e.preventDefault();
-    
     let newTodo = {
       id : Date.now(),
       title : value,
@@ -20,7 +20,7 @@ export default function App() {
     setTodoData(prev => [...prev, newTodo]);
     setValue("");
     
-  } 
+  }, [value])
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-blue-100">
